@@ -206,7 +206,7 @@ def coin_flip_simulator():
     add_score('coinflip', username, user_score)
 
 def memory_card_matching():
-    cards = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    cards = ['A', 'K', 'Q', 'J', 'A', 'K', 'Q', 'J']
     random.shuffle(cards)
     print("Memory Card Matching - Try to match pairs!")
     
