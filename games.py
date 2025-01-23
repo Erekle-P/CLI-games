@@ -71,7 +71,7 @@ def get_scores(game):
 
 # ASCII art for Rock, Paper, Scissors
 game_titles = {
-    "rps": '''
+    "rps": '''\033[32m
     █▀█ █▀█ █▀▀ █▄▀  
     █▀▄ █▄█ █▄▄ █░█  
 
@@ -80,52 +80,53 @@ game_titles = {
 
     █▀ █▀▀ █ █▀ █▀ █▀█ █▀█ █▀
     ▄█ █▄▄ █ ▄█ ▄█ █▄█ █▀▄ ▄█
-    ''',
+    \033[0m''',
     "rock": '''
-    _______
+  \033[31m  _______
 ---'   ____)
       (_____)
       (_____)
       (____)
 ---.__(___)
-    ''',
+    \033[0m''',
     "paper": '''
-    _______
+  \033[36m_______
 ---'   ____)____
           ______)
           _______)
          _______)
 ---.__________)
-    ''',
+\033[0m ''',
+
     "scissors": '''
-    _______
+  \033[33m _______
 ---'   ____)____
           ______)
        __________)
       (____)
 ---.__(___)
-    '''
+    \033[0m'''
 }
 
 # ASCII art for Coin Flip
-heads = """
-  ╔════════╗  
+heads = """ 
+  \033[92m╔════════╗  
  ╔╝ ░░░▒▒▓ ╚╗ 
 ╔╝ ░░░░▒▒▓▓ ╚╗
 ║ ░░░HEAD▒▓▓ ║
 ╚╗ ░░░▒▒▒▓▓ ╔╝
  ╚╗ ░░░▒▒▓ ╔╝ 
-  ╚════════╝  
+  ╚════════╝\033[0m  
 """
 
 tails = """
-  ╔════════╗  
+  \033[91m╔════════╗  
  ╔╝ ░░░▒▒▓ ╚╗ 
 ╔╝ ░░░░▒▒▓▓ ╚╗
 ║ ░░░TAIL▒▓▓ ║
 ╚╗ ░░░▒▒▒▓▓ ╔╝
  ╚╗ ░░░▒▒▓ ╔╝ 
-  ╚════════╝  
+  ╚════════╝\033[0m  
 """
 
 def display_game_title():
@@ -164,14 +165,14 @@ def rock_paper_scissors():
             print(game_titles["scissors"])
 
         if user_choice == computer_choice:
-            print("It's a tie!")
+            print("\033[43m\033[97mIt's a tie!\033[0m")
         elif (user_choice == 'rock' and computer_choice == 'scissors') or \
              (user_choice == 'paper' and computer_choice == 'rock') or \
              (user_choice == 'scissors' and computer_choice == 'paper'):
-            print("You win!")
+            print("\033[42m\033[30mYou win!\033[0m")
             user_score += 1
         else:
-            print("You lose!")
+            print("\033[41m\033[97mYou lose!\033[0m")
 
     print(f"Your final score: {user_score}")
     add_score('rps', username, user_score)
@@ -181,11 +182,11 @@ def coin_flip_simulator():
     user_score = 0
     
     while True:
-        user_guess = input("Guess heads or tails (or 'quit' to exit): ").lower()
+        user_guess = input("\033[97mGuess heads or tails (or 'quit' to exit):\033[0m ").lower()
         if user_guess == 'quit':
             break
         if user_guess not in ['heads', 'tails']:
-            print("Invalid guess. Please choose heads or tails.")
+            print("\033[31mInvalid guess. Please choose heads or tails.\033[0m")
             continue
         
         flip_result = random.choice(['heads', 'tails'])
@@ -197,16 +198,16 @@ def coin_flip_simulator():
             print(tails)
         
         if user_guess == flip_result:
-            print("You guessed correctly!")
+            print("\033[92mYou guessed correctly!\033[0m")
             user_score += 1
         else:
-            print("Incorrect guess!")
+            print("\033[91mIncorrect guess! \033[0m")
 
     print(f"Your final score: {user_score}")
     add_score('coinflip', username, user_score)
 
 def memory_card_matching():
-    cards = ['A', 'K', 'Q', 'J', 'A', 'K', 'Q', 'J']
+    cards = ['\033[95mA\033[0m', '\033[96mK\033[0m', '\033[91mQ\033[0m', '\033[94mJ\033[0m', '\033[95mA\033[0m', '\033[96mK\033[0m', '\033[91mQ\033[0m', '\033[94mJ\033[0m']
     random.shuffle(cards)
     print("Memory Card Matching - Try to match pairs!")
     
@@ -260,7 +261,7 @@ def typing_speed_test():
     sentence = "The quick brown fox jumps over the lazy dog."
     username = input('Enter your name: ')
     
-    print("Typing Speed Test - Type the following sentence as quickly as you can:")
+    print("\033[95m Typing Speed Test - Type the following sentence as quickly as you can:\033[0m")
     print(sentence)
     
     start_time = time.time()
@@ -283,31 +284,26 @@ def typing_speed_test():
 def choose_game():
     """Allow the user to choose a game."""
     while True:
-        print("\nChoose your game:")
-        print("1. Rock, Paper, Scissors")
-        print("2. Memory Card Matching")
-        print("3. Countdown Timer Quiz")
-        print("4. Coin Flip Simulator")
-        print("5. Typing Speed Test")
-        print("6. Quit")
+        print("\n\033[97mChoose your game:\033[0m")
+        print("\033[92m1. Rock, Paper, Scissors\033[0m")
+        print("\033[93m2. Memory Card Matching\033[0m")
+        print("\033[94m3. Countdown Timer Quiz\033[0m")
+        print("\033[96m4. Coin Flip Simulator\033[0m")
+        print("\033[95m5. Typing Speed Test\033[0m")
+        print("\033[91m6. Quit\033[0m")
         
         game_choice = input("Enter the number of your choice: ")
 
         if game_choice == '1':
             game_menu('rps')
-            break
         elif game_choice == '2':
             game_menu('memory')
-            break
         elif game_choice == '3':
             game_menu('countdown')
-            break
         elif game_choice == '4':
             game_menu('coinflip')
-            break
         elif game_choice == '5':
             game_menu('typing')
-            break
         elif game_choice == '6':
             print("Goodbye!")
             exit()
@@ -333,16 +329,14 @@ def game_menu(game):
                 coin_flip_simulator()
             elif game == 'typing':
                 typing_speed_test()
-            break
         elif option == '2':
             scores = get_scores(game)
             print('-' * 20)
             for score in scores:
                 print(f"{score[0]}: {score[1]}")
             print('-' * 20)
-        elif option == '3':
-            break
-
+        elif option == '3':  # When the user chooses to go back
+            return  # This will exit the current loop and return to the previous menu
 
 if __name__ == "__main__":
     create_scores_tables()
